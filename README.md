@@ -20,7 +20,14 @@ Predicting the number of newly acquired customers has many interesting use cases
 | order_date            | The date that the customer ordered the product              |
 
 ## 3. Data issues
+https://github.com/kennedykwangari/Data-Cleaning-with-Python-Challenges-/blob/master/Data%20Cleaning%20Character%20Encoding.ipynb
 
+- duplications?
+- original_product_name: misspellings and unclear distinct groups (E.ON STROM, E.ON STROM 24, E.ON STROM ÖKO, E.ON STROM ÖKO 24, E.ON STROM PUR ?)
+- postcode: mixture of data types, leading 0 is missing sometimes, one odd case 
+- bundesland: missing values, N:1 relationship
+- total_bonus: are values of 0 fine? Otherwise, this column looks good.
+- order_date: should be in date format
 
 ## 4. Installation and configuration instructions 
 1. Make sure python is installed on your system. (```python_version >= 3.8.10``` required)
