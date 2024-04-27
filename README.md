@@ -1,16 +1,22 @@
-# Customer signup data preprocessing
-Predicting the number of newly acquired customers has many interesting use cases for an energy supplier. It can be used for energy procurement on the forward market and help steer marketing campaigns. In this project, we use contract data from the past to clean the data such that it can be used for future prediction models.
+# Customer signup prediction
+This project is focused on predicting the number of newly acquired customers over time. This has many use cases with high business impact for E.ON. It will be used for energy procurement on the forward market and to help steer marketing campaigns. 
+
 
 ## 1. Project description
-- Goal of this project is to build a preprocessing pipeline in an ETL manner. Raw data is stored in ```data/raw/interview_signup.csv```. Processed data is loaded into ```data/processed/interview_signup_processed.csv```.
-- The toolbox in ```src/etl.py``` provides methods to perform the preprocessing of data. 
-- Challenges: what happens if raw_data will deviate in future?
-    - loaded data formats change
-        - new (unknown) columns
-        - data types change
-    - transformation logic changes
+The two main components of this project are (i) building a preprocessing pipeline and (ii) prediction modeling. 
+
+**Preprocessing:**
+- The goal of the preprocessing pipeline is to load and transform the raw data stored in ```data/raw/interview_signup.csv``` so it can be used for modeling. The processed data is stored in ```data/processed/interview_signup_processed.csv```. This is done in an ETL manner in ```notebooks/EDA.ipynb``` based on data from 2018.
+- To make the transformation steps from ```notebooks/EDA.ipynb``` easier to use for others, a module in ```src/etl.py``` is *in development*. In ```notebooks/demo_etl_module.ipynb```, there is a short tutorial on the functionalities of ```etl.py``` (still very limited features).
+- The transformation logic in the preprocessing steps may need to be adapted if...
+    - ... data formats and types in the raw data change
+    - ... new columns are added to the raw data
+    - ... new inconsistencies arise 
+
+**Modeling:** will be implemented in the future.
 
 ## 2. Raw data
+The data is stored in csv format and comes from 2018. It contains the following columns:
 | Column name           | Column description                                          |
 | --------------------- | ----------------------------------------------------------- | 
 | original_product_name | Product the customer signed up to                           |
@@ -20,21 +26,54 @@ Predicting the number of newly acquired customers has many interesting use cases
 | order_date            | The date that the customer ordered the product              |
 
 ## 3. Data issues
-https://github.com/kennedykwangari/Data-Cleaning-with-Python-Challenges-/blob/master/Data%20Cleaning%20Character%20Encoding.ipynb
+Differentiate between **high-level** and **low-level** data issues.
 
-- duplications?
-- original_product_name: misspellings and unclear distinct groups (E.ON STROM, E.ON STROM 24, E.ON STROM ÖKO, E.ON STROM ÖKO 24, E.ON STROM PUR ?)
-- postcode: mixture of data types, leading 0 is missing sometimes, one odd case 
-- bundesland: missing values, N:1 relationship
-- total_bonus: are values of 0 fine? Otherwise, this column looks good.
-- order_date: should be in date format
+**High-level issues** (and open questions):
+- Raw data contains duplicate rows
+    - Can we savely delete duplicate data? In theory, it can happen that several customers order the same product on the same date with the same home address postcode and the same total bonus...
+- Are we sure that no data are missing? For example, there are no gas products in the dataset.
+- Do we need all 5 columns from the dataset for the prediction task?
+- What exactely do we want to predict with the data on which granularity?
+    - Are future customer sign-ups predicted on a daily, weekly, monthly, ... basis? 
+    - Are we interested in the number of new sign-ups per state, postcode or product? 
+    - If we do multivariate time series predictions, what aggregation logics are preferred?
+
+**Low-level issues:**
+- original_product_name: 
+    - ambiguous data: misspellings that might partly be caused by inappropriate character encoding
+    - unclear distinct groups (are there 4,5,6 different product names?). The best guess is that there are 5 products: E.ON STROM, E.ON STROM 24, E.ON STROM ÖKO, E.ON STROM ÖKO 24, E.ON STROM PUR.
+- postcode:
+    - mixture of data types and inconsistent formats
+        - trailing decimal part (might come from type conversion)
+        - leading 0 is missing sometimes
+        - one odd case with additional letters.
+- bundesland: 
+    - inconsistent naming convention: German column name and entries
+    - 10% missing values
+        - strict N:1 relationship between postcode and state?
+        - infer empty bundesland from the postcode?
+        - can we use an external api to enrich our data?
+- total_bonus: 
+    - data accuracy: data is float but contains no decimals. Were decimals lost in type conversion?
+        - data type could be changed from float64 to int16 to save memory
+    - are values of 0 possible according to business rules? 
+    - can we assume consistent currency is € ?
+        - there are over 500 cases where the total bonus was between 1 and 20 €. These bonuses seem very small.
+        - there are 200 cases where the total bonus is larger or equal to 400 €. These bonuses seem very large.
+    - More fine-grained analyses could look at:
+        - are there cases where zeros appear frequently (e.g., on certain dates or products)?
+        - is the **timeseries** of mean total_bonus stationary? Is there data drift ?
+- order_date: 
+    - convert to date format
+        - potentially extract derived features like day-of-year, month, ...
+        - add derived feature, e.g. days to last sign-up for the product in this postcode area 
 
 ## 4. Installation and configuration instructions 
-1. Make sure python is installed on your system. (```python_version >= 3.8.10``` required)
+1. Make sure python is installed on your system. (```python_version == 3.8.10``` required)
 2. Navigate into your local repo 'customer-signup-prediction'. 
 3. Next, set up a virtual environment for python. The commands below will install all necessary packages and dependencies from ```requirements.txt``` into your virtual environment ```.venv```:
     - On **Linux**, run ```chmod +x create_venv.sh``` followed by ```./create_venv.sh``` 
-    - On **Windows**, execute ```create_venv.bat```
+    - On **Windows**, execute ```.\create_venv.bat```
 4. Activate your virtual environment by running ```source .venv/bin/activate``` in a **Linux** terminal or ```call .venv\Scripts\activate.bat``` in a **Windows** terminal.
 
 ## 5. How to use the Project 
