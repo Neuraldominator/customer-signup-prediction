@@ -53,6 +53,8 @@ Differentiate between **high-level** and **low-level** data issues.
         - strict N:1 relationship between postcode and state?
         - infer empty bundesland from the postcode?
         - can we use an external api to enrich our data?
+        - fill with "unknown" or drop?
+    - save storage by mapping to integers from 1 to 17 or using one-hot-encoding?
 - total_bonus: 
     - data accuracy: data is float but contains no decimals. Were decimals lost in type conversion?
         - data type could be changed from float64 to int16 to save memory
