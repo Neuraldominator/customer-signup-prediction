@@ -65,7 +65,7 @@ class DataPreprocessing:
             raise ValueError(f"The column {column_name} is not present in the DataFrame.")
         if valid_postcode_regex is None:
             valid_postcode_regex = r"^[0-9]{5}$"
-        return self._df[column_name].apply(lambda row: True if re.match(valid_postcode_regex, row) else False)
+        return self._df[column_name].apply(lambda row: True if re.fullmatch(valid_postcode_regex, row) else False)
     
     def remove_decimals(self, column_name=None):
         """
