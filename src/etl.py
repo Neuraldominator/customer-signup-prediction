@@ -123,7 +123,8 @@ class DataPreprocessing:
             *args: Variable-length arguments representing column names. Each argument can be a single column name or a list of column names.
         
         Returns:
-            DataFrame with the original column shape, where True if indicates a missing value (NaN) and False otherwise.
+            If several columns are parsed, returns DataFrame with specified columns, where True if indicates a missing value (NaN) and False otherwise.
+            If a single column is parsed, returns a Series.
         """
         if len(args) == 0:
             return pd.DataFrame()
@@ -139,8 +140,11 @@ class DataPreprocessing:
         if nonexisting_columns:
             raise ValueError(f"The columns {nonexisting_columns} are not present in the DataFrame.")
 
-        return self._df[columns].isna()
-    
+        if len(columns) == 1:
+            return self._df[columns[0]].isna()
+        else:
+            return self._df[columns].isna()
+
     def validate_state(self, column_name=None):
         """
         Returns a DataFrame with booleans indicating whether the entries of a column refer to one of the 16 German states.
