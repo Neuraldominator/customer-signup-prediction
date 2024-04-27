@@ -79,9 +79,20 @@ class DataPreprocessing:
         """
         if column_name is None:
             column_name = 'postcode'
-        self._df[column_name] = self._df[column_name].apply(lambda x: x.split(".")[0])
-        return self._df
+        elif column_name not in self.columns:
+            raise ValueError(f"The column {column_name} is not present in the DataFrame.")
         
+        # Make a copy of the original column values
+        original_values = self._df[column_name].copy() 
+        
+        # apply tranformation
+        self._df[column_name] = self._df[column_name].apply(lambda x: x.split(".")[0])
+        
+        # Count the number of changed entries
+        n_changes = sum(self._df[column_name] != original_values)
+        print(f"{n_changes} entries were changed.\n")
+        return self._df    
+       
     def remove_duplicate_rows(self, **kwargs):
         """
         Deletes duplicate data from df.
@@ -148,6 +159,8 @@ class DataPreprocessing:
         """
         if column_name is None:
             column_name = 'bundesland'
+        elif column_name not in self.columns:
+            raise ValueError(f"The column {column_name} is not present in the DataFrame.")
         valid_states = ['bayern', 'hessen', 'baden-württemberg', 'berlin', 'brandenburg', 'bremen', 'hamburg', 'mecklenburg-vorpommern', 'niedersachsen', 'nordrhein-westfalen', 'rheinland-pfalz', 'saarland', 'sachsen', 'sachsen-anhalt', 'schleswig-holstein', 'thüringen']
         return self._df[column_name].str.strip().str.lower().isin(valid_states)
 
