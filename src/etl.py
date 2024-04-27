@@ -20,7 +20,7 @@ class DataPreprocessing:
         Reads the first n lines of the csv and makes a best guess on the character encoding scheme.
         
         Args:
-            n (int): number of files to check for making best guess (default: 10,000).
+            n (int): number of files to check for making best guess. Defaults to 10,000.
    
         Returns:
             string with most likely encoding scheme.
@@ -53,8 +53,8 @@ class DataPreprocessing:
         Validates the rows of the column postcode against a regex.
 
         Args:
-            column_name (str, optional): Name of the DataFrame column to check for validity. Defaults to None. 
-            valid_postcode_regex (str, optional): Regular expression to validate the rows of the dataframe against. Defaults to None.
+            column_name (str, optional): Name of the DataFrame column to check for validity. Defaults to 'postcode'. 
+            valid_postcode_regex (str, optional): Regular expression to validate the rows of the dataframe against. Defaults to "^[0-9]{5}$".
 
         Returns:
             logical index specifing if row contains a valid (True) or invalid (False) postcode
@@ -119,3 +119,20 @@ class DataPreprocessing:
             raise ValueError(f"The columns {nonexisting_columns} are not present in the DataFrame.")
 
         return self._df[columns].isna()
+    
+    def validate_state(self, column_name=None):
+        """
+        Returns a DataFrame with booleans indicating whether the entries of a column refer to one of the 16 German states.
+        
+        Args:
+            column_name (str): Column name of the dataframe that is checked for validity. Defaults to 'bundesland'.
+        
+        Returns:
+            logical index whether entry is valid (True) or invalid (False) postcode
+        
+        """
+        if column_name is None:
+            column_name = 'bundesland'
+        valid_states = ['bayern', 'hessen', 'baden-württemberg', 'berlin', 'brandenburg', 'bremen', 'hamburg', 'mecklenburg-vorpommern', 'niedersachsen', 'nordrhein-westfalen', 'rheinland-pfalz', 'saarland', 'sachsen', 'sachsen-anhalt', 'schleswig-holstein', 'thüringen']
+        return self._df[column_name].str.strip().str.lower().isin(valid_states)
+
