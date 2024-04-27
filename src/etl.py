@@ -75,23 +75,18 @@ class DataPreprocessing:
             column_name (str, optional): Name of the DataFrame column to check for remove decimals from. Defaults to 'postcode'. 
 
         Returns:
-            Transformed Dataframe. index specifing if row contains a valid (True) or invalid (False) postcode
+            None
         """
         if column_name is None:
             column_name = 'postcode'
         elif column_name not in self.columns:
             raise ValueError(f"The column {column_name} is not present in the DataFrame.")
         
-        # Make a copy of the original column values
-        original_values = self._df[column_name].copy() 
-        
-        # apply tranformation
-        self._df[column_name] = self._df[column_name].apply(lambda x: x.split(".")[0])
-        
-        # Count the number of changed entries
-        n_changes = sum(self._df[column_name] != original_values)
+        original_values = self._df[column_name].copy()  # Make a copy of the original column values
+        self._df[column_name] = self._df[column_name].apply(lambda x: x.split(".")[0])      
+        n_changes = sum(self._df[column_name] != original_values)  # Count the number of changed entries
         print(f"{n_changes} entries were changed.\n")
-        return self._df    
+        return None 
        
     def remove_duplicate_rows(self, **kwargs):
         """
