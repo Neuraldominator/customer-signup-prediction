@@ -77,10 +77,9 @@ Differentiate between **high-level** and **low-level** data issues.
 4. Activate your virtual environment by running ```source .venv/bin/activate``` in a **Linux** terminal or ```call .venv\Scripts\activate.bat``` in a **Windows** terminal.
 
 ## 5. How to use the Project 
-- Provide instructions and examples so users/contributors can use the project. This will make it easy for them in case they encounter a problem – they will always have a place to reference what is expected.
-- You can also make use of visual aids by including materials like screenshots to show examples of the running project and also the structure and design principles used in your project.
-- Also if your project will require authentication like passwords or usernames, this is a good section to include the credentials.
+- Start with ```notebooks/EDA.ipynb``` and follow the preprocessing steps. The focus there is on cleaning postcodes.
+- Not all necessary preprocessing steps were conducted. Feel free to collaborate on the project and reach out. 
+- For more consistent usage of the preprocessing steps, the module ```etl.py``` could be further developed. 
 
 ## 6. Contact information
-Dominik Kessler
-email: dominik.kessler@eon.com
+vorname.nachname@email.com
