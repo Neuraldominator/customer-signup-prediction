@@ -70,7 +70,7 @@ Differentiate between **high-level** and **low-level** data issues.
 
 ## 4. Installation and configuration instructions 
 1. Make sure python is installed on your system. ```python_version == 3.8.10``` required
-2. Navigate into your local repo 'customer-signup-prediction'. 
+2. Navigate into your local repo 'customer-signup-prediction'. Run ```git clone https://github.com/Neuraldominator/customer-signup-prediction.git```
 3. Next, set up a virtual environment for python. The commands below will install all necessary packages and dependencies from ```requirements.txt``` into your virtual environment ```.venv```:
     - On **Linux**, run ```chmod +x create_venv.sh``` followed by ```./create_venv.sh``` 
     - On **Windows**, execute ```.\create_venv.bat```
