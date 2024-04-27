@@ -66,6 +66,21 @@ class DataPreprocessing:
         if valid_postcode_regex is None:
             valid_postcode_regex = r"^[0-9]{5}$"
         return self._df[column_name].apply(lambda row: True if re.match(valid_postcode_regex, row) else False)
+    
+    def remove_decimals(self, column_name=None):
+        """
+        Overwrites the entries of the column by splitting the strings at the first comma and taking everything on the left of this comma.
+
+        Args:
+            column_name (str, optional): Name of the DataFrame column to check for remove decimals from. Defaults to 'postcode'. 
+
+        Returns:
+            Transformed Dataframe. index specifing if row contains a valid (True) or invalid (False) postcode
+        """
+        if column_name is None:
+            column_name = 'postcode'
+        self._df[column_name] = self._df[column_name].apply(lambda x: x.split(".")[0])
+        return self._df
         
     def remove_duplicate_rows(self, **kwargs):
         """
