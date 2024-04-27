@@ -40,11 +40,11 @@ Differentiate between **high-level** and **low-level** data issues.
 
 **Low-level issues:**
 - original_product_name: 
-    - ambiguous data: misspellings that might partly be caused by inappropriate character encoding
+    - ambiguous data: misspellings that might partly be caused by inappropriate character encoding in earlier data processing steps.
     - unclear distinct groups (are there 4,5,6 different product names?). The best guess is that there are 5 products: E.ON STROM, E.ON STROM 24, E.ON STROM ÖKO, E.ON STROM ÖKO 24, E.ON STROM PUR.
 - postcode:
     - mixture of data types and inconsistent formats
-        - trailing decimal part (might come from type conversion)
+        - trailing decimal part (might come from type conversion in earlier data processing steps.)
         - leading 0 is missing sometimes
         - one odd case with additional letters.
 - bundesland: 
