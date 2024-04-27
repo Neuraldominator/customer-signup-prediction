@@ -7,11 +7,11 @@ The two main components of this project are (i) building a preprocessing pipelin
 
 **Preprocessing:**
 - The goal of the preprocessing pipeline is to load and transform the raw data stored in ```data/raw/interview_signup.csv``` so it can be used for modeling. The processed data is stored in ```data/processed/interview_signup_processed.csv```. This is done in an ETL manner in ```notebooks/EDA.ipynb``` based on data from 2018.
-- To make the transformation steps from ```notebooks/EDA.ipynb``` easier to use for others, a module in ```src/etl.py``` is *in development*. In ```notebooks/demo_etl_module.ipynb```, there is a short tutorial on the functionalities of ```etl.py``` (still very limited features).
 - The transformation logic in the preprocessing steps may need to be adapted if...
     - ... data formats and types in the raw data change
     - ... new columns are added to the raw data
     - ... new inconsistencies arise 
+- To make the transformation steps from ```notebooks/EDA.ipynb``` easier to use, a module in ```src/etl.py``` is *in development*. In ```notebooks/demo_etl_module.ipynb```, there is a short tutorial on the functionalities of ```etl.py``` (still limited features).
 
 **Modeling:** will be implemented in the future.
 
