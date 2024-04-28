@@ -13,8 +13,8 @@ This project is focused on predicting the number of newly acquired customers ove
 The two main components of this project are (i) building a preprocessing pipeline and (ii) prediction modeling. 
 
 **Preprocessing:**
-- Load and transform the raw data stored in ```data/raw/interview_signup.csv``` so it can be used for modeling. The processed data is stored in ```data/processed/interview_signup_processed.csv```. This is done in an ETL manner in ```notebooks/EDA.ipynb```.
-- To make the transformation steps from ```notebooks/EDA.ipynb``` reusable, scalable and maintainable, a module in ```src/etl.py``` is *in development*. In ```notebooks/demo_etl_module.ipynb```, you can find a more simplified ETL pipeline (object-oriented) building on functionalities of ```src/etl.py``` (still limited features).
+- Load and transform the raw data stored in ```data/raw/interview_signup.csv``` so it can be used for modeling. The processed data is stored in ```data/processed/interview_signup_processed.csv```. This is done in an ETL manner in ```notebooks/data_preprocessing.ipynb```.
+- To make the transformation steps from ```notebooks/data_preprocessing.ipynb``` reusable, scalable and maintainable, a module in ```src/etl.py``` is *in development*. In ```notebooks/demo_etl_module.ipynb```, you can find a more simplified ETL pipeline (object-oriented) building on functionalities of ```src/etl.py``` (still limited features).
 - CAUTION: The transformation logic in the preprocessing steps may need to be adapted if...
     - ... data formats and types change in the raw data 
     - ... new columns are added to the raw data
@@ -81,6 +81,6 @@ The data is stored in csv format and comes from 2018. It contains the following 
         - add derived feature, e.g. days to last sign-up for the product in this postcode area 
 
 ## 5. How to use the Project 
-- Start with ```notebooks/EDA.ipynb``` and follow the preprocessing steps. The focus there is on cleaning postcodes.
+- Start with ```notebooks/data_preprocessing.ipynb``` and follow the preprocessing steps. The focus there is on cleaning postcodes.
 - Not all necessary preprocessing steps were conducted. Feel free to collaborate on the project and reach out. 
 - For more consistent usage of the preprocessing steps, the module ```etl.py``` could be further developed. 
