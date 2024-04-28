@@ -13,7 +13,7 @@ The two main components of this project are (i) building a preprocessing pipelin
     - ... new inconsistencies arise 
 - To make the transformation steps from ```notebooks/EDA.ipynb``` easier and more consistent to use, a module in ```src/etl.py``` is *in development*. In ```notebooks/demo_etl_module.ipynb```, you can find a simplified ETL pipeline (object-oriented) building on functionalities of ```src/etl.py``` (still limited features).
 
-**Modeling:** will be implemented in the future in ```models/```.
+**Modeling:** yet to be implemented. In the future, modules belong in ```src/model.py``` and notebooks in ```notebooks/model.ipynb```.
 
 ## 2. Raw data
 The data is stored in csv format and comes from 2018. It contains the following columns:
