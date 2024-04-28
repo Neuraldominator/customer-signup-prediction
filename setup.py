@@ -15,11 +15,6 @@ setup(
     author="Dominik Kessler",
     # author_email="name@mail.com",
     license="MIT",
-    classifiers=[
-        "License :: OSI Approved :: MIT License",
-        "Programming Language :: Python :: 3.10",
-        "Operating System :: OS Independent",
-    ],
     install_requires=["chardet==5.2.0",
                      # "charset-normalizer==3.3.2",
                       "ftfy==6.2.0",
@@ -37,8 +32,6 @@ setup(
                       #matplotlib-inline==0.1.7
                       #rapidfuzz==3.8.1
     ],
-    extras_require={
-        "dev": ["pytest>=7.0", "twine>=4.0.2"],
-    },
+    extras_require={},
     python_requires="==3.8",
 )
