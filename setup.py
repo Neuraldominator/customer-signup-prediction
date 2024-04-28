@@ -15,6 +15,12 @@ setup(
     author="Dominik Kessler",
     # author_email="name@mail.com",
     license="MIT",
+    classifiers=[
+        "Intended Audience :: Developers",
+        "Programming Language :: Python :: 3.8",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
+    ],
     install_requires=["chardet==5.2.0",
                      # "charset-normalizer==3.3.2",
                       "ftfy==6.2.0",
