@@ -67,6 +67,24 @@ class DataPreprocessing:
             valid_postcode_regex = r"^[0-9]{5}$"
         return self._df[column_name].apply(lambda row: True if re.fullmatch(valid_postcode_regex, row) else False)
     
+    def validate_state(self, column_name=None):
+        """
+        Returns a DataFrame with booleans indicating whether the entries of a column refer to one of the 16 German states.
+        
+        Args:
+            column_name (str): Column name of the dataframe that is checked for validity. Defaults to 'bundesland'.
+        
+        Returns:
+            logical index whether entry is valid (True) or invalid (False) postcode
+        
+        """
+        if column_name is None:
+            column_name = 'bundesland'
+        elif column_name not in self.columns:
+            raise ValueError(f"The column {column_name} is not present in the DataFrame.")
+        valid_states = ['bayern', 'hessen', 'baden-württemberg', 'berlin', 'brandenburg', 'bremen', 'hamburg', 'mecklenburg-vorpommern', 'niedersachsen', 'nordrhein-westfalen', 'rheinland-pfalz', 'saarland', 'sachsen', 'sachsen-anhalt', 'schleswig-holstein', 'thüringen']
+        return self._df[column_name].str.strip().str.lower().isin(valid_states)
+    
     def remove_decimals(self, column_name=None):
         """
         Overwrites the entries of the column by splitting the strings at the first comma and taking everything on the left of this comma.
@@ -87,6 +105,36 @@ class DataPreprocessing:
         n_changes = sum(self._df[column_name] != original_values)  # Count the number of changed entries
         print(f"{n_changes} entries were changed.\n")
         return None 
+    
+    def zero_padding(self, column_name, side=None, n=None):
+        """
+        Pads the string entries in column with zeros until the string has n total characters. Side determines from with side of the string the zeros are padded.
+
+        Args:
+            side (str, optional): Specifies the side on which to add zeros. Defaults to left.
+            n (int, optional): Number of characters to fill up to with zeros. Defaults to 5.
+
+        Returns:
+            None
+        """
+        if side is None:
+            side='left'
+        elif side.lower() not in ['left', 'right']:
+            raise ValueError("input argument side must be either 'left' or 'right'.")
+        
+        if n is None:
+            n=5
+            
+        original_values = self._df[column_name].copy()  # Make a copy of the original column values
+        
+        if side=='left':
+            self._df[column_name] = self._df[column_name].str.rjust(5, fillchar='0')
+        else:
+            self._df[column_name] = self._df[column_name].str.ljust(5, fillchar='0')
+        
+        n_changes = sum(self._df[column_name] != original_values)  # Count the number of changed entries
+        print(f"{n_changes} entries were changed.\n")
+        return None
        
     def remove_duplicate_rows(self, **kwargs):
         """
@@ -100,20 +148,6 @@ class DataPreprocessing:
         """
         self._df = self._df.drop_duplicates(**kwargs)
         return self._df
-    
-    def save_data_to_csv(self, file_path, **kwargs):
-        """
-        Saves preprocessed data into data/processed/file_path.
-
-        Args:
-            file_path (str): path to data/processed/file_path.csv.
-            **kwargs: Additional keyword arguments to be passed to pandas drop_duplicates() method of dataframes.
-        
-        Returns:
-            None.
-        """
-        self.file_path_processed_data = file_path
-        self._df.to_csv(self.file_path_processed_data, **kwargs)
 
     def missing_values(self, *args):
         """
@@ -145,21 +179,16 @@ class DataPreprocessing:
         else:
             return self._df[columns].isna()
 
-    def validate_state(self, column_name=None):
+    def save_data_to_csv(self, file_path, **kwargs):
         """
-        Returns a DataFrame with booleans indicating whether the entries of a column refer to one of the 16 German states.
-        
+        Saves preprocessed data into data/processed/file_path.
+
         Args:
-            column_name (str): Column name of the dataframe that is checked for validity. Defaults to 'bundesland'.
+            file_path (str): path to data/processed/file_path.csv.
+            **kwargs: Additional keyword arguments to be passed to pandas drop_duplicates() method of dataframes.
         
         Returns:
-            logical index whether entry is valid (True) or invalid (False) postcode
-        
+            None.
         """
-        if column_name is None:
-            column_name = 'bundesland'
-        elif column_name not in self.columns:
-            raise ValueError(f"The column {column_name} is not present in the DataFrame.")
-        valid_states = ['bayern', 'hessen', 'baden-württemberg', 'berlin', 'brandenburg', 'bremen', 'hamburg', 'mecklenburg-vorpommern', 'niedersachsen', 'nordrhein-westfalen', 'rheinland-pfalz', 'saarland', 'sachsen', 'sachsen-anhalt', 'schleswig-holstein', 'thüringen']
-        return self._df[column_name].str.strip().str.lower().isin(valid_states)
-
+        self.file_path_processed_data = file_path
+        self._df.to_csv(self.file_path_processed_data, **kwargs)
