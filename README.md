@@ -12,7 +12,7 @@ The two main components of this project are (i) building a preprocessing pipelin
     - ... new columns are added to the raw data
     - ... new inconsistencies arise 
 
-**Modeling:** yet to be implemented. In the future, modules belong in ```src/model.py``` and notebooks in ```notebooks/model.ipynb```.
+**Modeling:** yet to be implemented. In the future, modules belong in ```src/example_model.py``` and notebooks in ```notebooks/example_model.ipynb```.
 
 ## 2. Raw data
 The data is stored in csv format and comes from 2018. It contains the following columns:
