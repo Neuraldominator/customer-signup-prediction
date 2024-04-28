@@ -1,5 +1,5 @@
 # Customer signup prediction
-This project is focused on predicting the number of newly acquired customers over time. This has many use cases with high business impact for E.ON. It will be used for energy procurement on the forward market and to help steer marketing campaigns. 
+This project is focused on predicting the number of newly acquired customers over time. It will be used for energy procurement on the forward market and to help steer marketing campaigns. 
 
 
 ## 1. Project description
@@ -11,9 +11,9 @@ The two main components of this project are (i) building a preprocessing pipelin
     - ... data formats and types in the raw data change
     - ... new columns are added to the raw data
     - ... new inconsistencies arise 
-- To make the transformation steps from ```notebooks/EDA.ipynb``` easier to use, a module in ```src/etl.py``` is *in development*. In ```notebooks/demo_etl_module.ipynb```, there is a short tutorial on the functionalities of ```etl.py``` (still limited features).
+- To make the transformation steps from ```notebooks/EDA.ipynb``` easier and more consistent to use, a module in ```src/etl.py``` is *in development*. In ```notebooks/demo_etl_module.ipynb```, you can find a simplified ETL pipeline (object-oriented) building on functionalities of ```src/etl.py``` (still limited features).
 
-**Modeling:** will be implemented in the future.
+**Modeling:** will be implemented in the future in ```models/```.
 
 ## 2. Raw data
 The data is stored in csv format and comes from 2018. It contains the following columns:
@@ -54,7 +54,7 @@ Differentiate between **high-level** and **low-level** data issues.
         - infer empty bundesland from the postcode?
         - can we use an external api to enrich our data?
         - fill with "unknown" or drop?
-    - save storage by mapping to integers from 1 to 17 or using one-hot-encoding?
+    - save storage by mapping to integers from 1 to 17 ?
 - total_bonus: 
     - data accuracy: data is float but contains no decimals. Were decimals lost in type conversion?
         - data type could be changed from float64 to int16 to save memory
