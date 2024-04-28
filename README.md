@@ -24,10 +24,10 @@ The data is stored in csv format and comes from 2018. It contains the following 
 | total_bonus           | The bonus amount we provided (reduces the first-year price) |
 | order_date            | The date that the customer ordered the product              |
 
-## 3. Data issues
+## 3. Data issues and open questions
 Differentiate between **high-level** and **low-level** data issues.
 
-**High-level issues** (and open questions):
+**High-level issues**:
 - Raw data contains duplicate rows
     - Can we savely delete duplicate data? In theory, it can happen that several customers order the same product on the same date with the same home address postcode and the same total bonus...
 - Are we sure that no data are missing? For example, there are no gas products in the dataset.
