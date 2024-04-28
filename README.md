@@ -40,6 +40,7 @@ The data is stored in csv format and comes from 2018. It contains the following 
 - original_product_name: 
     - ambiguous data: misspellings that might partly be caused by inappropriate character encoding in earlier data processing steps.
     - unclear distinct groups (are there 4,5,6 different product names?). The best guess is that there are 5 products: E.ON STROM, E.ON STROM 24, E.ON STROM ÖKO, E.ON STROM ÖKO 24, E.ON STROM PUR.
+    - save memory by converting to categorical data type
 - postcode:
     - mixture of data types and inconsistent formats
         - trailing decimal part (might come from type conversion in earlier data processing steps.)
@@ -53,11 +54,11 @@ The data is stored in csv format and comes from 2018. It contains the following 
         - infer empty bundesland from the postcode
         - fill with "unknown" or drop?
     - can we use an external data/apis to enrich our data?
-    - save storage by converting to categorical data type
+    - save memory by converting to categorical data type
 - total_bonus: 
     - data accuracy: data is float but contains no decimals. 
         - were decimals lost in type conversion?
-        - can we assume consistent currency is € ?
+        - can we assume that the currency is € consistently?
         - data type could be changed from float64 to int16 to save memory
     - outliers
         - are values of 0 possible according to business rules? 
