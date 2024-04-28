@@ -1,7 +1,15 @@
 # Customer signup prediction
 This project is focused on predicting the number of newly acquired customers over time. It will be used for energy procurement and marketing campaigns. 
 
-## 1. Project description
+## 1. Installation and configuration instructions 
+1. Make sure python is installed on your system. ```python_version == 3.8.10``` required
+2. Navigate into your local repo 'customer-signup-prediction'. Run ```git clone https://github.com/Neuraldominator/customer-signup-prediction.git```
+3. Next, set up a virtual environment for python. The commands below will install all necessary packages and dependencies from ```requirements.txt``` into your virtual environment ```.venv```:
+    - On **Mac and Linux**, run ```chmod +x create_venv.sh``` followed by ```./create_venv.sh``` 
+    - On **Windows**, execute ```.\create_venv.bat```
+4. Activate your virtual environment by running ```source .venv/bin/activate``` in a **Linux or Mac** terminal or ```call .venv\Scripts\activate.bat``` in a **Windows** terminal.
+
+## 2. Project description
 The two main components of this project are (i) building a preprocessing pipeline and (ii) prediction modeling. 
 
 **Preprocessing:**
@@ -14,7 +22,7 @@ The two main components of this project are (i) building a preprocessing pipelin
 
 **Modeling:** yet to be implemented. In the future, modules belong in ```src/example_model.py``` and notebooks in ```notebooks/example_model.ipynb```.
 
-## 2. Raw data
+## 3. Raw data
 The data is stored in csv format and comes from 2018. It contains the following columns:
 | Column name           | Column description                                          |
 | --------------------- | ----------------------------------------------------------- | 
@@ -24,7 +32,7 @@ The data is stored in csv format and comes from 2018. It contains the following 
 | total_bonus           | The bonus amount we provided (reduces the first-year price) |
 | order_date            | The date that the customer ordered the product              |
 
-## 3. Data issues and open questions
+## 4. Data issues and open questions
 **High-level issues**:
 - Raw data contains duplicate rows
     - Can we savely delete duplicate data? In theory, it can happen that several customers order the same product on the same date with the same home address postcode and the same total bonus...
@@ -72,18 +80,7 @@ The data is stored in csv format and comes from 2018. It contains the following 
         - potentially extract derived features like day-of-year, month, ...
         - add derived feature, e.g. days to last sign-up for the product in this postcode area 
 
-## 4. Installation and configuration instructions 
-1. Make sure python is installed on your system. ```python_version == 3.8.10``` required
-2. Navigate into your local repo 'customer-signup-prediction'. Run ```git clone https://github.com/Neuraldominator/customer-signup-prediction.git```
-3. Next, set up a virtual environment for python. The commands below will install all necessary packages and dependencies from ```requirements.txt``` into your virtual environment ```.venv```:
-    - On **Mac and Linux**, run ```chmod +x create_venv.sh``` followed by ```./create_venv.sh``` 
-    - On **Windows**, execute ```.\create_venv.bat```
-4. Activate your virtual environment by running ```source .venv/bin/activate``` in a **Linux or Mac** terminal or ```call .venv\Scripts\activate.bat``` in a **Windows** terminal.
-
 ## 5. How to use the Project 
 - Start with ```notebooks/EDA.ipynb``` and follow the preprocessing steps. The focus there is on cleaning postcodes.
 - Not all necessary preprocessing steps were conducted. Feel free to collaborate on the project and reach out. 
 - For more consistent usage of the preprocessing steps, the module ```etl.py``` could be further developed. 
-
-## 6. Contact information
-vorname.nachname@email.com
