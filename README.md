@@ -1,5 +1,5 @@
 # Customer signup prediction
-This project is focused on predicting the number of newly acquired customers over time. It will be used for energy procurement on the forward market and for marketing campaigns. 
+This project is focused on predicting the number of newly acquired customers over time. It will be used for energy procurement and marketing campaigns. 
 
 ## 1. Project description
 The two main components of this project are (i) building a preprocessing pipeline and (ii) prediction modeling. 
