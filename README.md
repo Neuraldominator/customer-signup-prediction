@@ -33,9 +33,10 @@ Differentiate between **high-level** and **low-level** data issues.
 - Are we sure that no data are missing? For example, there are no gas products in the dataset.
 - Do we need all 5 columns from the dataset for the prediction task?
 - What exactely do we want to predict with the data on which granularity?
-    - Are future customer sign-ups predicted on a daily, weekly, monthly, ... basis? 
-    - Are we interested in the number of new sign-ups per state, postcode or product? 
-    - If we do multivariate time series predictions, what aggregation logics are preferred?
+    - aggregation logics
+        - Are future customer sign-ups predicted on a daily, weekly, monthly, ... basis? 
+        - Are we interested in the number of new sign-ups per state, postcode or product? 
+    - what is our target variable?
 
 **Low-level issues:**
 - original_product_name: 
@@ -48,20 +49,23 @@ Differentiate between **high-level** and **low-level** data issues.
         - one odd case with additional letters.
 - bundesland: 
     - inconsistent naming convention: German column name and entries
+    - may be redundant information (postcode more fine-grained)
     - 10% missing values
-        - strict N:1 relationship between postcode and state?
-        - infer empty bundesland from the postcode?
-        - can we use an external api to enrich our data?
+        - strict N:1 relationship between postcode and state? -> not quite
+        - infer empty bundesland from the postcode
         - fill with "unknown" or drop?
-    - save storage by mapping to integers from 1 to 17 ?
+    - can we use an external data/apis to enrich our data?
+    - save storage by converting to categorical data type
 - total_bonus: 
-    - data accuracy: data is float but contains no decimals. Were decimals lost in type conversion?
+    - data accuracy: data is float but contains no decimals. 
+        - were decimals lost in type conversion?
+        - can we assume consistent currency is € ?
         - data type could be changed from float64 to int16 to save memory
-    - are values of 0 possible according to business rules? 
-    - can we assume consistent currency is € ?
+    - outliers
+        - are values of 0 possible according to business rules? 
         - there are over 500 cases where the total bonus was between 1 and 20 €. These bonuses seem very small.
         - there are 200 cases where the total bonus is larger or equal to 400 €. These bonuses seem very large.
-    - More fine-grained analyses could look at:
+    - more detailed analyses could look at:
         - are there cases where zeros appear frequently (e.g., on certain dates or products)?
         - is the **timeseries** of mean total_bonus stationary? Is there data drift ?
 - order_date: 
