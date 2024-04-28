@@ -1,17 +1,16 @@
 # Customer signup prediction
 This project is focused on predicting the number of newly acquired customers over time. It will be used for energy procurement on the forward market and to help steer marketing campaigns. 
 
-
 ## 1. Project description
 The two main components of this project are (i) building a preprocessing pipeline and (ii) prediction modeling. 
 
 **Preprocessing:**
 - The goal of the preprocessing pipeline is to load and transform the raw data stored in ```data/raw/interview_signup.csv``` so it can be used for modeling. The processed data is stored in ```data/processed/interview_signup_processed.csv```. This is done in an ETL manner in ```notebooks/EDA.ipynb``` based on data from 2018.
-- The transformation logic in the preprocessing steps may need to be adapted if...
+- To make the transformation steps from ```notebooks/EDA.ipynb``` reusable, scalable and maintainable, a module in ```src/etl.py``` is *in development*. In ```notebooks/demo_etl_module.ipynb```, you can find a more simplified ETL pipeline (object-oriented) building on functionalities of ```src/etl.py``` (still limited features).
+- CAUTION: The transformation logic in the preprocessing steps may need to be adapted if...
     - ... data formats and types in the raw data change
     - ... new columns are added to the raw data
     - ... new inconsistencies arise 
-- To make the transformation steps from ```notebooks/EDA.ipynb``` easier and more consistent to use, a module in ```src/etl.py``` is *in development*. In ```notebooks/demo_etl_module.ipynb```, you can find a simplified ETL pipeline (object-oriented) building on functionalities of ```src/etl.py``` (still limited features).
 
 **Modeling:** yet to be implemented. In the future, modules belong in ```src/model.py``` and notebooks in ```notebooks/model.ipynb```.
 
