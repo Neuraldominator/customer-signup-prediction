@@ -8,6 +8,8 @@ This project is focused on predicting the number of newly acquired customers ove
 4. The commands below will execute setup.py for your system. This installs all necessary packages and dependencies from ```requirements.txt``` into your virtual environment ```.venv```. It also builds and installs the packages in ```src/```  in your Python environment for testing or development purposes:
     - On **Mac and Linux**, run ```chmod +x run_setup.sh``` followed by ```./run_setup.sh``` 
     - On **Windows**, execute ```.\run_setup.bat```
+5. Activate your virtual environment by running ```source .venv/bin/activate``` in a **Linux or Mac** terminal or ```call .venv\Scripts\activate.bat``` in a **Windows** terminal.
+
 
 ## 2. Project description
 The two main components of this project are (i) building a preprocessing pipeline and (ii) prediction modeling. 
