@@ -55,7 +55,7 @@ The data is stored in csv format and comes from 2018. It contains the following 
     - mixture of data types and inconsistent formats
         - trailing decimal part (might come from type conversion in earlier data processing steps.)
         - leading 0 is missing sometimes
-        - one odd case with additional letters.
+        - one odd case with a partial match but additional letters.
 - bundesland: 
     - inconsistent naming convention: German column name and entries
     - 10% missing values
