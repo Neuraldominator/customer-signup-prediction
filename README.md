@@ -9,7 +9,7 @@ This project is focused on predicting the number of newly acquired customers ove
     - On **Mac and Linux**, run ```chmod +x run_setup.sh``` followed by ```./run_setup.sh``` 
     - On **Windows**, execute ```.\run_setup.bat```
 5. Activate your virtual environment by running ```source .venv/bin/activate``` in a **Linux or Mac** terminal or ```call .venv\Scripts\activate.bat``` in a **Windows** terminal.
-
+6. If you are using VS Code as your IDE, you may need to restart to select the virtual environment as your kernel in jupyter notebooks.
 
 ## 2. Project description
 The two main components of this project are (i) building a preprocessing pipeline and (ii) prediction modeling. 
