@@ -26,5 +26,5 @@ setup(
     ],
     install_requires=requirements,
     extras_require={},
-    python_requires="==3.8",
+    python_requires="==3.8.10",
 )
