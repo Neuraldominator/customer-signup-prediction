@@ -2,12 +2,12 @@
 This project is focused on predicting the number of newly acquired customers over time. It will be used for energy procurement and marketing campaigns. 
 
 ## 1. Installation and configuration instructions 
-1. Make sure python is installed on your system. ```python_version == 3.8.10``` required
-2. Navigate into your local repo 'customer-signup-prediction'. Run ```git clone https://github.com/Neuraldominator/customer-signup-prediction.git```
-3. Next, set up a virtual environment for python. The commands below will install all necessary packages and dependencies from ```requirements.txt``` into your virtual environment ```.venv```:
-    - On **Mac and Linux**, run ```chmod +x create_venv.sh``` followed by ```./create_venv.sh``` 
-    - On **Windows**, execute ```.\create_venv.bat```
-4. Activate your virtual environment by running ```source .venv/bin/activate``` in a **Linux or Mac** terminal or ```call .venv\Scripts\activate.bat``` in a **Windows** terminal.
+1. Make sure you are running on required ```python_version==3.8.10```. Download from https://www.python.org/downloads/ if necessary and add to PATH.
+2. Run ```git clone https://github.com/Neuraldominator/customer-signup-prediction.git``` to clone this repository to your local machine.
+3. Navigate to the repo directory: ```cd customer-signup-prediction```
+4. The commands below will execute setup.py for your system. This installs all necessary packages and dependencies from ```requirements.txt``` into your virtual environment ```.venv```. It also builds and installs the packages in ```src/```  in your Python environment for testing or development purposes:
+    - On **Mac and Linux**, run ```chmod +x run_setup.sh``` followed by ```./run_setup.sh``` 
+    - On **Windows**, execute ```.\run_setup.bat```
 
 ## 2. Project description
 The two main components of this project are (i) building a preprocessing pipeline and (ii) prediction modeling. 
