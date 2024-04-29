@@ -47,7 +47,7 @@ The data is stored in csv format and comes from 2018. It contains the following 
 **Low-level issues:**
 - original_product_name: 
     - ambiguous data: misspellings that might partly be caused by inappropriate character encoding in earlier data processing steps.
-    - unclear distinct groups (are there 4,5,6 different product names?). The best guess is that there are 5 products: E.ON STROM, E.ON STROM 24, E.ON STROM ÖKO, E.ON STROM ÖKO 24, E.ON STROM PUR.
+    - unclear distinct groups (are there 4,5,6 different product names?). The best guess is: E.ON STROM, E.ON STROM 24, E.ON STROM ÖKO, E.ON STROM ÖKO 24, E.ON STROM PUR.
     - save memory by converting to categorical data type
 - postcode:
     - mixture of data types and inconsistent formats
@@ -56,31 +56,28 @@ The data is stored in csv format and comes from 2018. It contains the following 
         - one odd case with additional letters.
 - bundesland: 
     - inconsistent naming convention: German column name and entries
-    - may be redundant information (postcode more fine-grained)
     - 10% missing values
-        - strict N:1 relationship between postcode and state? -> not quite
-        - infer empty bundesland from the postcode
-        - fill with "unknown" or drop?
     - can we use an external data/apis to enrich our data?
     - save memory by converting to categorical data type
+    - may be redundant information (postcode more fine-grained)
 - total_bonus: 
-    - data accuracy: data is float but contains no decimals. 
-        - were decimals lost in type conversion?
-        - can we assume that the currency is € consistently?
-        - data type could be changed from float64 to int16 to save memory
     - outliers
         - are values of 0 possible according to business rules? 
         - there are over 500 cases where the total bonus was between 1 and 20 €. These bonuses seem very small.
         - there are 200 cases where the total bonus is larger or equal to 400 €. These bonuses seem very large.
+    - data accuracy: data is float but contains no decimals. 
+        - were decimals lost in type conversion?
+        - can we assume that the currency is € consistently?
+        - data type could be changed from float64 to int16 to save memory
     - more detailed analyses could look at:
         - are there cases where zeros appear frequently (e.g., on certain dates or products)?
-        - is the **timeseries** of mean total_bonus stationary? Is there data drift ?
+        - is the timeseries of mean total_bonus per order date stationary? Is there data drift?
 - order_date: 
     - convert to date format
         - potentially extract derived features like day-of-year, month, ...
         - add derived feature, e.g. days to last sign-up for the product in this postcode area 
 
 ## 5. How to use the Project 
-- Start with ```notebooks/data_preprocessing.ipynb``` and follow the preprocessing steps. The focus there is on cleaning postcodes.
+- Start with ```notebooks/data_preprocessing.ipynb``` and follow the preprocessing steps. The focus there is on cleaning 'postcode' and 'original_product_name'.
 - Not all necessary preprocessing steps were conducted. Feel free to collaborate on the project and reach out. 
-- For more consistent usage of the preprocessing steps, the module ```etl.py``` could be further developed. 
+- For more reusable, scalable and maintainale usage of the preprocessing steps, the module ```etl.py``` should be further developed. 
